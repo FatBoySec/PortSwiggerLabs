@@ -21,6 +21,8 @@ Using this technique, we can retrieve data in the way already described, by syst
 
 ```TrackingId=x'%3BSELECT+CASE+WHEN+(1=1)+THEN+pg_sleep(10)+ELSE+pg_sleep(0)+END--```
 
+#### ***Note***: ```%3B``` = ```;``` Used for Stacked Queries in Postgres 
+
 Verify that the application takes 10 seconds to respond.
 
 3 - Now change it to:
