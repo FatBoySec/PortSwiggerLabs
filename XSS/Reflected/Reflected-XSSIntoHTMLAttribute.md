@@ -21,3 +21,9 @@ More commonly in this situation, angle brackets are blocked or encoded, so your 
 ```" autofocus onfocus=alert(document.domain) x="```
 
 The above payload creates an ```onfocus``` event that will execute JavaScript when the element receives the focus, and also adds the ```autofocus``` attribute to try to trigger the ```onfocus``` event automatically without any user interaction. Finally, it adds ```x="``` to gracefully repair the following markup. 
+
+### Reflected XSS into attribute with angle brackets HTML-encoded
+
+Sometimes the XSS context is into a type of HTML tag attribute that itself can create a scriptable context. Here, you can execute JavaScript without needing to terminate the attribute value. For example, if the XSS context is into the href attribute of an anchor tag, you can use the javascript pseudo-protocol to execute script. For example:
+
+```<a href="javascript:alert(document.domain)">```
