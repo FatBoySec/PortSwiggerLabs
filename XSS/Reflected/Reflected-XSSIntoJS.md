@@ -1,4 +1,4 @@
-### XSS into JavaScript
+## XSS into JavaScript
 
 When the XSS context is some existing JavaScript within the response, a wide variety of situations can arise, with different techniques necessary to perform a successful exploit.
 Terminating the existing script
@@ -35,7 +35,7 @@ The reason this works is that the browser first performs HTML parsing to identif
 5 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
 
 
-### Breaking out of a JavaScript string
+## Breaking out of a JavaScript string
 
 In cases where the XSS context is inside a quoted string literal, it is often possible to break out of the string and execute JavaScript directly. It is essential to repair the script following the XSS context, because any syntax errors there will prevent the whole script from executing.
 
@@ -45,3 +45,16 @@ Some useful ways of breaking out of a string literal are:
 '-a`lert(document.domain)-'
 ';alert(document.domain)//
 ```
+
+### Reflected XSS into a JavaScript string with angle brackets HTML encoded
+
+1 - Submit a random alphanumeric string in the search box, then use Burp Suite to intercept the search request and send it to Burp Repeater.
+
+2 - Observe that the random string has been reflected inside a JavaScript string.
+
+3 - Replace your input with the following payload to break out of the JavaScript string and inject an alert:
+
+```'-alert(1)-'```
+    
+4 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
+
