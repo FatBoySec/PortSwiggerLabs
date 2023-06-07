@@ -34,3 +34,14 @@ The reason this works is that the browser first performs HTML parsing to identif
    
 5 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
 
+
+### Breaking out of a JavaScript string
+
+In cases where the XSS context is inside a quoted string literal, it is often possible to break out of the string and execute JavaScript directly. It is essential to repair the script following the XSS context, because any syntax errors there will prevent the whole script from executing.
+
+Some useful ways of breaking out of a string literal are: 
+
+```
+'-a`lert(document.domain)-'
+';alert(document.domain)//
+```
