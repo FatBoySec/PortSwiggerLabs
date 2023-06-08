@@ -58,3 +58,41 @@ Some useful ways of breaking out of a string literal are:
     
 4 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
 
+### Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped
+
+Some applications attempt to prevent input from breaking out of the JavaScript string by escaping any single quote characters with a backslash. A backslash before a character tells the JavaScript parser that the character should be interpreted literally, and not as a special character such as a string terminator. In this situation, applications often make the mistake of failing to escape the backslash character itself. This means that an attacker can use their own backslash character to neutralize the backslash that is added by the application.
+
+For example, suppose that the input:
+
+```';alert(document.domain)//```
+
+gets converted to:
+
+```\';alert(document.domain)//```
+
+You can now use the alternative payload:
+
+```\';alert(document.domain)//```
+
+which gets converted to:
+
+```\\';alert(document.domain)//```
+
+Here, the first backslash means that the second backslash is interpreted literally, and not as a special character. This means that the quote is now interpreted as a string terminator, and so the attack succeeds. 
+
+
+1 - Submit a random alphanumeric string in the search box, then use Burp Suite to intercept the search request and send it to Burp Repeater.
+
+2 - Observe that the random string has been reflected inside a JavaScript string.
+    
+3 - Try sending the payload test'payload and observe that your single quote gets backslash-escaped, preventing you from breaking out of the string.
+
+4 - Try sending the payload test\payload and observe that your backslash doesn't get escaped.
+
+5 - Replace your input with the following payload to break out of the JavaScript string and inject an alert:
+
+```\'-alert(1)//```
+
+6 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
+
+
