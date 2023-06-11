@@ -96,3 +96,14 @@ Here, the first backslash means that the second backslash is interpreted literal
 6 - Verify the technique worked by right clicking, selecting "Copy URL", and pasting the URL in the browser. When you load the page it should trigger an alert.
 
 
+### Reflected XSS in a JavaScript URL with some characters blocked
+
+Some websites make XSS more difficult by restricting which characters you are allowed to use. This can be on the website level or by deploying a WAF that prevents your requests from ever reaching the website. In these situations, you need to experiment with other ways of calling functions which bypass these security measures. One way of doing this is to use the ```throw``` statement with an exception handler. This enables you to pass arguments to a function without using parentheses. The following code assigns the ```alert()``` function to the global exception handler and the ```throw``` statement passes the ```1``` to the exception handler (in this case alert). The end result is that the ```alert()``` function is called with 1 as an argument.
+
+```onerror=alert;throw 1```
+
+There are multiple ways of using this technique to call functions without parentheses. https://portswigger.net/research/xss-without-parentheses-and-semi-colons
+
+The next lab demonstrates a website that filters certain characters. You'll have to use similar techniques to those described above in order to solve it.
+
+...
