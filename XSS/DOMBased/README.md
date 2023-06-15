@@ -26,3 +26,5 @@ https://portswigger.net/web-security/dom-based
 ### How to test for DOM-based cross-site scripting
 
 The majority of DOM XSS vulnerabilities can be found quickly and reliably using Burp Suite's web vulnerability scanner. To test for DOM-based cross-site scripting manually, you generally need to use a browser with developer tools, such as Chrome. You need to work through each available source in turn, and test each one individually. 
+
+more: https://portswigger.net/web-security/cross-site-scripting/dom-based
